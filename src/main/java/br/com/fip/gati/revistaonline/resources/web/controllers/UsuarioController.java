@@ -66,7 +66,6 @@ public class UsuarioController {
 		usuario.setTentativasLogon(0);
 		
 		Autor autor = new Autor();
-		autor.setNome(usuario.getNome());
 		usuario.setAutor(autor);
 
 		this.usuarioRepositorio.save(usuario);

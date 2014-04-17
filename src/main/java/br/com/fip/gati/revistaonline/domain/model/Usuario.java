@@ -6,7 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -41,9 +40,8 @@ public class Usuario extends Entity {
 	@Size(min=5, max=64, message="{usuario.senha.tamanho}")
 	private String senha;
 	
-	//@NotNull(message="{usuario.nome.nulo}")
-	//@Size(min=5, message="{usuario.nome.tamanho}")
-	@Transient
+	@NotNull(message="{usuario.nome.nulo}")
+	@Size(min=5, message="{usuario.nome.tamanho}")
 	private String nome;
 	
 	private boolean alterarSenhaProximoAcesso;
