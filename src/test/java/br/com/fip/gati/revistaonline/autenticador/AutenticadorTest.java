@@ -25,7 +25,7 @@ public class AutenticadorTest {
 		
 		usuarioArmazenado = new Usuario();
 		usuarioArmazenado.setAdmin(true);
-		usuarioArmazenado.setEmail("admin@admin.com");
+//		usuarioArmazenado.setEmail("admin@admin.com");
 		usuarioArmazenado.setLogin("admin");
 	}
 	

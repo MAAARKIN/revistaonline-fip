@@ -31,10 +31,10 @@ public class Usuario extends Entity {
 	
 	private Date dtaUltimoAcesso;
 	
-	@NotNull(message="{usuario.email.nulo}")
-	@Email(message="{usuario.email.invalido}")
-	@Column(unique=true)
-	private String email;
+//	@NotNull(message="{usuario.email.nulo}")
+//	@Email(message="{usuario.email.invalido}")
+//	@Column(unique=true)
+//	private String email;
 	
 	@NotNull(message="{usuario.senha.nulo}")
 	@Size(min=8, message="{usuario.senha.tamanho}")
@@ -93,14 +93,6 @@ public class Usuario extends Entity {
 
 	public Date getDtaUltimoAcesso() {
 		return dtaUltimoAcesso;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getEmail() {
-		return email;
 	}
 
 	public void setSenha(String senha) {
@@ -176,6 +168,6 @@ public class Usuario extends Entity {
 	}
 
 	public UsuarioInfo getUsuarioInfo() {
-		return new UsuarioInfo(getId(), getEmail(), getNome(),getLogin(), isAdmin());
+		return new UsuarioInfo(getId(), getAutor().getEmail(), getNome(),getLogin(), isAdmin());
 	}
 }

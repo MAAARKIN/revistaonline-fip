@@ -86,21 +86,21 @@
 			<div class="row" >
 				<div class="form-group col-lg-6" >
 					<label>Prenome:</label>
-					<input type="text" class="form-control input-sm" name="autor.preNome" placeholder="Pre Nome" value="${autor.preNome}" />
+					<input type="text" class="form-control input-sm" name="autor.prenome" placeholder="Pre Nome" value="${autor.preNome}" />
 				</div>
 			</div>
 			
 			<div class="row" >
 				<div class="form-group col-lg-6" >
 					<label>Nome do meio:</label>
-					<input type="text" class="form-control input-sm" name="autor.nomeMeio" placeholder="Nome do Meio" value="${autor.nomeDoMeio}" />
+					<input type="text" class="form-control input-sm" name="autor.nome" placeholder="Nome do Meio" value="${autor.nomeDoMeio}" />
 				</div>
 			</div>
 			
 			<div class="row" >
 				<div class="form-group col-lg-6" >
 					<label>Sobrenome:*</label>
-					<input type="text" class="form-control input-sm" name="autor.sobreNome" placeholder="Sobrenome" value="${autor.sobreNome}" />
+					<input type="text" class="form-control input-sm" name="autor.sobrenome" placeholder="Sobrenome" value="${autor.sobreNome}" />
 				</div>	
 			</div>
 			

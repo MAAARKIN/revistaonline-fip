@@ -8,6 +8,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
+
 import br.com.fip.gati.revistaonline.domain.model.enums.SexoEnum;
 import br.com.fip.gati.revistaonline.domain.model.enums.TitulacaoEnum;
 
@@ -34,6 +36,11 @@ public class Autor extends Entity {
 	@NotNull
 	@Size(min=1, max=10)
 	private String iniciais;
+	
+	@NotNull(message="{usuario.email.nulo}")
+	@Email(message="{usuario.email.invalido}")
+	@Column(unique=true)
+	private String email;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(length=1)
@@ -204,6 +211,14 @@ public class Autor extends Entity {
 	
 	public boolean isEditor() {
 		return editor != null;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }

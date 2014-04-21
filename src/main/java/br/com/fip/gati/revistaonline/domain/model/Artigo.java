@@ -33,6 +33,9 @@ public class Artigo extends Entity {
 	private String condicoesParaSubmissao;
 	@NotNull
 	private String agencias;
+	
+	private Revista revista;
+	private Edicao edicao;
 
 	public String getAreaSubAreaDoConhecimento() {
 		return areaSubAreaDoConhecimento;
@@ -129,6 +132,22 @@ public class Artigo extends Entity {
 
 	public void setAutores(List<Autor> autores) {
 		this.autores = autores;
+	}
+
+	public Revista getRevista() {
+		return revista;
+	}
+
+	public void setRevista(Revista revista) {
+		this.revista = revista;
+	}
+
+	public Edicao getEdicao() {
+		return edicao;
+	}
+
+	public void setEdicao(Edicao edicao) {
+		this.edicao = edicao;
 	}
 	
 }
