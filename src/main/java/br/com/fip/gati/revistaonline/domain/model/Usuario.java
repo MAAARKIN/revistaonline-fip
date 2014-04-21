@@ -6,11 +6,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.fip.gati.revistaonline.domain.service.autenticacao.UsuarioInfo;
 
@@ -20,10 +20,10 @@ public class Usuario extends Entity {
 
 	private Integer tentativasLogon;
 	
-	@NotNull(message="{usuario.cpf.nulo}")
+	/*@NotNull(message="{usuario.cpf.nulo}")
 	@Size(min=11, max=14, message="{usuario.cpf.tamanho}")
 	@CPF(message="{usuario.cpf.invalido}")
-	private String cpf;
+	private String cpf;*/
 	
 	private String status;
 	
@@ -37,8 +37,12 @@ public class Usuario extends Entity {
 	private String email;
 	
 	@NotNull(message="{usuario.senha.nulo}")
-	@Size(min=5, max=64, message="{usuario.senha.tamanho}")
+	@Size(min=8, message="{usuario.senha.tamanho}")
+	@Column(length=100)
 	private String senha;
+	
+	@Transient
+	private String confirmacaoSenha;
 	
 	@NotNull(message="{usuario.nome.nulo}")
 	@Size(min=5, message="{usuario.nome.tamanho}")
@@ -66,13 +70,14 @@ public class Usuario extends Entity {
 		return tentativasLogon;
 	}
 
+	/*
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
 	public String getCpf() {
 		return cpf;
-	}
+	}*/
 
 	public void setDtaCadastro(Date dtaCadastro) {
 		this.dtaCadastro = dtaCadastro;
@@ -104,6 +109,14 @@ public class Usuario extends Entity {
 
 	public String getSenha() {
 		return senha;
+	}
+
+	public String getConfirmacaoSenha() {
+		return confirmacaoSenha;
+	}
+
+	public void setConfirmacaoSenha(String confirmacaoSenha) {
+		this.confirmacaoSenha = confirmacaoSenha;
 	}
 
 	public void setNome(String nome) {
