@@ -1,8 +1,11 @@
 package br.com.fip.gati.revistaonline.domain.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -75,6 +78,9 @@ public class Autor extends Entity {
 	
 	@OneToOne(mappedBy="autor")
 	private Editor editor;
+	
+	@ManyToMany(mappedBy="autores")
+	private List<Artigo> artigos;
 	
 	
 	public String getLattes() {
@@ -219,6 +225,14 @@ public class Autor extends Entity {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Artigo> getArtigos() {
+		return artigos;
+	}
+
+	public void setArtigos(List<Artigo> artigos) {
+		this.artigos = artigos;
 	}
 	
 }

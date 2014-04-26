@@ -3,3 +3,4 @@
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/modern-business.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.metisMenu.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.bootstrap.wizard.js"></script>

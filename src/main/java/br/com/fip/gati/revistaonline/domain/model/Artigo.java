@@ -2,6 +2,9 @@ package br.com.fip.gati.revistaonline.domain.model;
 
 import java.util.List;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -15,6 +18,8 @@ public class Artigo extends Entity {
 	private String resumo;
 	@NotNull
 	private String keyWord;
+	@ManyToMany
+	@JoinTable(name = "artigo_autor", joinColumns = @JoinColumn(name = "artigo_id"), inverseJoinColumns = @JoinColumn(name = "autor_id"))
 	private List<Autor> autores;
 	@NotNull
 	private String secao;
@@ -34,8 +39,8 @@ public class Artigo extends Entity {
 	@NotNull
 	private String agencias;
 	
-	private Revista revista;
-	private Edicao edicao;
+//	private Revista revista;
+//	private Edicao edicao;
 
 	public String getAreaSubAreaDoConhecimento() {
 		return areaSubAreaDoConhecimento;
@@ -134,20 +139,20 @@ public class Artigo extends Entity {
 		this.autores = autores;
 	}
 
-	public Revista getRevista() {
-		return revista;
-	}
-
-	public void setRevista(Revista revista) {
-		this.revista = revista;
-	}
-
-	public Edicao getEdicao() {
-		return edicao;
-	}
-
-	public void setEdicao(Edicao edicao) {
-		this.edicao = edicao;
-	}
+//	public Revista getRevista() {
+//		return revista;
+//	}
+//
+//	public void setRevista(Revista revista) {
+//		this.revista = revista;
+//	}
+//
+//	public Edicao getEdicao() {
+//		return edicao;
+//	}
+//
+//	public void setEdicao(Edicao edicao) {
+//		this.edicao = edicao;
+//	}
 	
 }

@@ -26,7 +26,7 @@ public class ArtigoController {
 		this.valitador = validator;
 	}
 	
-	@Get("/submissao")
+	@Get("/office/submissao")
 	public void formulario() {
 		
 	}

@@ -1,88 +1,89 @@
+
 <div class="row">
 	<div class="col-lg-12">
 		<!-- formulario do artigo -->
-		<div class="col-lg-6">
+<!-- 		<div class="col-lg-6"> -->
 			<div class="row" >
-				<div class="form-group col-lg-6" >
+				<div class="form-group col-lg-4" >
 					<label>Titulo:</label>
-					<input type="text" class="form-control input-sm" name="artigo.titulo" placeholder="Titulo" value="${artigo.titulo}" />
+					<input type="text" class="form-control" name="artigo.titulo" placeholder="Titulo" value="${artigo.titulo}" />
 				</div>
 			</div>
 
 			<div class="row" >
-				<div class="form-group col-lg-6" >
+				<div class="form-group col-lg-4" >
 					<label>Resumo:</label>
-					<input type="text" class="form-control input-sm" name="artigo.resumo" placeholder="Resumo" value="${artigo.resumo}" />
+					<input type="text" class="form-control" name="artigo.resumo" placeholder="Resumo" value="${artigo.resumo}" />
 				</div>
 			</div>
 
 			<div class="row" >
-				<div class="form-group col-lg-6" >
+				<div class="form-group col-lg-4" >
 					<label>Área e sub-área do Conhecimento:</label>
 					<input type="text" class="form-control input-sm" name="artigo.areaSubAreaDoConhecimento" placeholder="AreaSubAreaDoConhecimento" value="${artigo.areaSubAreaDoConhecimento}" />
 				</div>	
 			</div>
 			
 			<div class="row" >
-				<div class="form-group col-lg-6" >
+				<div class="form-group col-lg-4" >
 					<label>Palavras-chave:</label>
-					<input type="text" class="form-control input-sm" name="artigo.keyWord" placeholder="KeyWord" value="${artigo.keyWord}" />
+					<input type="text" class="form-control" name="artigo.keyWord" placeholder="KeyWord" value="${artigo.keyWord}" />
 				</div>
 			</div>
 			
 			<div class="row" >
-				<div class="form-group col-lg-6" >
+				<div class="form-group col-lg-4" >
 					<label>Geo-espacial:</label>
-					<input type="text" class="form-control input-sm" name="artigo.geoEspacial" placeholder="GeoEspacial" value="${artigo.geoEspacial}" />
+					<input type="text" class="form-control" name="artigo.geoEspacial" placeholder="GeoEspacial" value="${artigo.geoEspacial}" />
 				</div>
 			</div>
 			
 			<div class="row" >
-				<div class="form-group col-lg-6" >
+				<div class="form-group col-lg-4" >
 					<label>Cronológica ou histórica:</label>
-					<input type="text" class="form-control input-sm" name="artigo.cronologicaOuHistorica" placeholder="CronologicaOuHistorica" value="${artigo.cronologicaOuHistorica}" />
+					<input type="text" class="form-control" name="artigo.cronologicaOuHistorica" placeholder="CronologicaOuHistorica" value="${artigo.cronologicaOuHistorica}" />
 				</div>
 			</div>
 
 			<div class="row" >
-				<div class="form-group col-lg-6" >
+				<div class="form-group col-lg-4" >
 					<label>Características da amostragem da pesquisa:</label>
-					<input type="text" class="form-control input-sm" name="artigo.caracteristicasDaAmostragemDaPesquisa" placeholder="CaracteristicasDaAmostragemDaPesquisa" value="${artigo.caracteristicasDaAmostragemDaPesquisa}" />
+					<input type="text" class="form-control" name="artigo.caracteristicasDaAmostragemDaPesquisa" placeholder="CaracteristicasDaAmostragemDaPesquisa" value="${artigo.caracteristicasDaAmostragemDaPesquisa}" />
 				</div>
 			</div>
 			
 			<div class="row" >
-				<div class="form-group col-lg-6" >
+				<div class="form-group col-lg-4" >
 					<label>Seção:</label>
-					<input type="text" class="form-control input-sm" name="artigo.secao" placeholder="Secao" value="${artigo.secao}" />
+					<input type="text" class="form-control" name="artigo.secao" placeholder="Secao" value="${artigo.secao}" />
 				</div>
 			</div>
 
 			<div class="row" >
-				<div class="form-group col-lg-6" >
+				<div class="form-group col-lg-4" >
 					<label>Condições para Submissão:</label>
-					<input type="text" class="form-control input-sm" name="artigo.condicoesParaSubmissao" placeholder="CondicoesParaSubmissao" value="${artigo.condicoesParaSubmissao}" />
+					<input type="text" class="form-control" name="artigo.condicoesParaSubmissao" placeholder="CondicoesParaSubmissao" value="${artigo.condicoesParaSubmissao}" />
 				</div>
 			</div>
 			
 			<div class="row" >
-				<div class="form-group col-lg-6" >
+				<div class="form-group col-lg-4" >
 					<label>Idioma:</label>
-					<input type="text" class="form-control input-sm" name="artigo.idioma" placeholder="Idioma" value="${artigo.idioma}" />
+					<input type="text" class="form-control" name="artigo.idioma" placeholder="Idioma" value="${artigo.idioma}" />
 				</div>
 			</div>
 
 			<div class="row" >
-				<div class="form-group col-lg-6" >
+				<div class="form-group col-lg-4" >
 					<label>Agências:</label>
-					<input type="text" class="form-control input-sm" name="artigo.agencias" placeholder="Agencias" value="${artigo.agencias}" />
+					<input type="text" class="form-control" name="artigo.agencias" placeholder="Agencias" value="${artigo.agencias}" />
 				</div>
 			</div>
 				
-		</div>
+<!-- 		</div> -->
 		
 		<!-- formulario do autor -->
-		<div class="col-lg-6">
+		<%--<div class="col-lg-6">
 			<div class="row" >
 				<div class="form-group col-lg-6" >
 					<label>Prenome:</label>
@@ -132,6 +133,6 @@
 				</div>
 			</div>
 						
-		</div>
+		</div> --%>
 	</div>
 </div>
