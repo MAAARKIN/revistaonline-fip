@@ -20,24 +20,19 @@ public class Usuario extends Entity {
 
 	private Integer tentativasLogon;
 	
-	/*@NotNull(message="{usuario.cpf.nulo}")
-	@Size(min=11, max=14, message="{usuario.cpf.tamanho}")
-	@CPF(message="{usuario.cpf.invalido}")
-	private String cpf;*/
-	
 	private String status;
 	
 	private Date dtaCadastro;
 	
 	private Date dtaUltimoAcesso;
 	
-//	@NotNull(message="{usuario.email.nulo}")
-//	@Email(message="{usuario.email.invalido}")
-//	@Column(unique=true)
-//	private String email;
+	@NotNull(message="{usuario.email.nulo}")
+	@Email(message="{usuario.email.invalido}")
+	@Column(unique=true)
+	private String email;
 	
 	@NotNull(message="{usuario.senha.nulo}")
-	@Size(min=8, message="{usuario.senha.tamanho}")
+	@Size(min=8, max=64, message="{usuario.senha.tamanho}")
 	@Column(length=100)
 	private String senha;
 	
@@ -155,6 +150,14 @@ public class Usuario extends Entity {
 		return autor != null;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public void setAtivo() {
 		this.status = "A";
 	}
@@ -169,5 +172,9 @@ public class Usuario extends Entity {
 
 	public UsuarioInfo getUsuarioInfo() {
 		return new UsuarioInfo(getId(), getAutor().getEmail(), getNome(),getLogin(), isAdmin());
+	}
+	
+	public boolean isSenhaConfirmada() {
+		return senha.equals(confirmacaoSenha);
 	}
 }
