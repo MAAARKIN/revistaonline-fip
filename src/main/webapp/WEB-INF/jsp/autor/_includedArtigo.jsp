@@ -14,6 +14,31 @@
 
 <script>
 
+$(document).on('change', '.email', function() {
+	//capturar o self
+	var self = $(this);
+	var email = self.val();
+	var url = '<c:url value="/consultaAutor/"/>'+email;
+	
+	$.ajax({ 
+		url: url,
+		type: 'POST',
+		dataType:'json',
+		success:function(data){
+			var parentPreName = self.parents('div.autores');
+			var preNome = parentPreName.children('div.row').children('div').children('.preNome');
+			/* options.push('<td>'+data.limitePre+'</td>'); */
+		    /* $(href).html(options.join('')); */
+		},  
+		error:function(){
+
+		}  
+	});
+	//capturar os inputs
+	//efetuar o ajax
+	//povoar o objeto.
+});
+
 $(document).on('click', '.delAutor', function() {
 	var self = $(this);
 	var parent = self.parents('div.autores');
@@ -29,7 +54,7 @@ $(document).on('click', '.addAutor', function() {
     		'<a class="delAutor btn btn-danger pull-right">Remover Autor</a>' +
     		'<div class="row">' +
 				'<div class="form-group col-lg-8">' +
-					'<label>Prenome:</label> <input type="text" class="form-control"' +
+					'<label>Prenome:</label> <input type="text" class="form-control preNome"' +
 						'name="artigo.autores[].prenome" placeholder="Pre Nome" />' +
 				'</div>' +
 			'</div>' +
@@ -51,7 +76,7 @@ $(document).on('click', '.addAutor', function() {
 			
 			'<div class="row">' +
 			'<div class="form-group col-lg-8">' +
-				'<label>E-mail:*</label> <input type="text" class="form-control"' +
+				'<label>E-mail:*</label> <input type="text" class="form-control email"' +
 					'name="artigo.autores[].email" placeholder="E-mail" />' +
 				'</div>' +
 			'</div>' +

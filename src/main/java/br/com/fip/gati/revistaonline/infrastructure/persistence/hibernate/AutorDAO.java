@@ -27,4 +27,10 @@ public class AutorDAO extends GenericDAO<Autor> implements AutorRepositorio {
 				.list();
 	}
 	
+	public Autor getAutorPorEmail(String email) {
+		return (Autor) getCurrentSession().createCriteria(Autor.class)
+				.add(Restrictions.eq("email", email))
+				.uniqueResult();
+	}
+	
 }
