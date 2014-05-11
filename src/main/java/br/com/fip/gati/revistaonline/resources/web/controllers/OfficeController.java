@@ -1,5 +1,6 @@
 package br.com.fip.gati.revistaonline.resources.web.controllers;
 
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,12 +12,19 @@ import br.com.caelum.vraptor.Result;
 import br.com.fip.gati.revistaonline.application.AvaliacaoArtigoService;
 import br.com.fip.gati.revistaonline.domain.exception.RevistaException;
 import br.com.fip.gati.revistaonline.domain.model.Artigo;
+import br.com.fip.gati.revistaonline.domain.model.Autor;
+import br.com.fip.gati.revistaonline.domain.model.AvaliacaoArtigo;
 import br.com.fip.gati.revistaonline.domain.model.Avaliador;
 import br.com.fip.gati.revistaonline.domain.model.Revista;
+import br.com.fip.gati.revistaonline.domain.model.Usuario;
 import br.com.fip.gati.revistaonline.domain.repositorio.ArtigoRepositorio;
+import br.com.fip.gati.revistaonline.domain.repositorio.AvaliacaoRepositorio;
 import br.com.fip.gati.revistaonline.domain.repositorio.AvaliadorRepositorio;
 import br.com.fip.gati.revistaonline.domain.repositorio.RevistaRepositorio;
+import br.com.fip.gati.revistaonline.domain.repositorio.UsuarioRepositorio;
+import br.com.fip.gati.revistaonline.resources.web.UsuarioLogado;
 import br.com.fip.gati.revistaonline.resources.web.Controllers;
+
 
 @Resource
 public class OfficeController {
@@ -24,12 +32,20 @@ public class OfficeController {
 	private RevistaRepositorio revistas;
 	private ArtigoRepositorio artigos;
 	private AvaliacaoArtigoService avaliacaoService;
+	private AvaliacaoRepositorio avaliacoes; 
+	private AvaliadorRepositorio avaliadores; 
+	private UsuarioLogado usuarioLogado;
+	private UsuarioRepositorio usuario; 
 	
-	public OfficeController(Result result, RevistaRepositorio revistas, ArtigoRepositorio artigos, AvaliadorRepositorio avaliadores, AvaliacaoArtigoService avaliacaoService) {
+	public OfficeController(Result result, RevistaRepositorio revistas, ArtigoRepositorio artigos, AvaliadorRepositorio avaliadores, AvaliacaoArtigoService avaliacaoService, UsuarioLogado usuarioLogado, AvaliacaoRepositorio avaliacoes, UsuarioRepositorio usuario) {
 		this.result = result;
 		this.revistas = revistas;
 		this.artigos = artigos;
 		this.avaliacaoService = avaliacaoService;
+		this.usuarioLogado = usuarioLogado;
+		this.avaliacoes = avaliacoes; 
+		this.usuario = usuario;
+		this.avaliadores = avaliadores;
 	}
 	
 	public void index() {
@@ -45,11 +61,21 @@ public class OfficeController {
 	}
 	
 	public void revisoesPendentes() {
-		
+		Long idLogado = usuarioLogado.getUsuarioInfo().getID();
+		Usuario usu = usuario.load(idLogado);
+		Autor autor = usu.getAutor();
+		Avaliador avaliadorbd = avaliadores.getAvaliador(autor);
+		List<AvaliacaoArtigo> avaliacoesPendentes = avaliacoes.getAvaliacoesPendente(avaliadorbd);
+		result.include("avaliacaoList", avaliacoesPendentes);
 	}
 	
 	public void revisoesConcluidas() {
-		
+		Long idLogado = usuarioLogado.getUsuarioInfo().getID();
+		Usuario usu = usuario.load(idLogado);
+		Autor autor = usu.getAutor();
+		Avaliador avaliadorbd = avaliadores.getAvaliador(autor);
+		List<AvaliacaoArtigo> avaliacoesConcluidas = avaliacoes.getAvaliacoesConcluidas(avaliadorbd);
+		result.include("avaliacaoList", avaliacoesConcluidas);
 	}
 	
 	@Get("/office/revista/{revista.id}/artigos/pendentes")
@@ -61,6 +87,7 @@ public class OfficeController {
 	}
 	
 	@Post("/office/artigo/avaliadores")
+
 	public void associarAvaliadores(Revista revista, Artigo artigo, String tituloSelecionado, List<Avaliador> avaliadores) {
 		result.include("tituloSelecionado", tituloSelecionado);
 		result.include("artigo", artigo);

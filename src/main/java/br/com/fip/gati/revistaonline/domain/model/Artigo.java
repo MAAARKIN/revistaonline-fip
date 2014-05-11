@@ -64,11 +64,13 @@ public class Artigo extends Entity {
 	@OneToMany(mappedBy="artigo", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<AvaliacaoArtigo> avaliacoes;
 	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="revista_id")
 	@NotNull
 	private Revista revista;
 	
+
 	public String getAreaSubAreaDoConhecimento() {
 		return areaSubAreaDoConhecimento;
 	}
@@ -190,6 +192,7 @@ public class Artigo extends Entity {
 		this.dataSubmissao = dataSubmissao;
 	}
 	
+
 	public Revista getRevista() {
 		return revista;
 	}
@@ -197,6 +200,7 @@ public class Artigo extends Entity {
 	public void setRevista(Revista revista) {
 		this.revista = revista;
 	}
+
 
 	public void associarAvaliador(Avaliador avaliador) throws RevistaException {
 		if(!isPendenteDeAvaliacao()) {
