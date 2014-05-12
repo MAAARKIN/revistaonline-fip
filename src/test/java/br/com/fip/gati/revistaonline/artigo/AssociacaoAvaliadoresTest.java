@@ -85,7 +85,7 @@ public class AssociacaoAvaliadoresTest {
 		
 		Artigo artigodb = new Artigo();
 		artigodb.setId(1L);
-		artigodb.setStatus(ArtigoStatusEnum.E);
+		artigodb.setStatus(ArtigoStatusEnum.REVISAO_AVALIACAO);
 		when(artigos.load(1L)).thenReturn(artigodb);
 		
 		aa.associarAvaliadores(artigoJaEmAvaliacao, avalidores);
@@ -99,7 +99,7 @@ public class AssociacaoAvaliadoresTest {
 		
 		Artigo artigodb = new Artigo();
 		artigodb.setId(1L);
-		artigodb.setStatus(ArtigoStatusEnum.P);
+		artigodb.setStatus(ArtigoStatusEnum.PENDENTE);
 		when(artigos.load(1L)).thenReturn(artigodb);
 
 		aa.associarAvaliadores(artigodb, avalidores);
@@ -116,7 +116,7 @@ public class AssociacaoAvaliadoresTest {
 		
 		Artigo artigodb = new Artigo();
 		artigodb.setId(1L);
-		artigodb.setStatus(ArtigoStatusEnum.P);
+		artigodb.setStatus(ArtigoStatusEnum.PENDENTE);
 		artigodb.setAvaliacoes(new ArrayList<AvaliacaoArtigo>());
 		when(artigos.load(1L)).thenReturn(artigodb);
 

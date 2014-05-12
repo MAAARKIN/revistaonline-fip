@@ -38,8 +38,6 @@ public class UsuarioService {
 		}
 
 		usuario.setLogin(usuario.getLogin().trim());
-		usuario.setEmail(usuario.getEmail().trim());
-		
 		usuario.setSenha(ShaEncrypt.hash(usuario.getSenha(), this.env.get("encryption.salt")));
 		usuario.setAlterarSenhaProximoAcesso(false);
 		usuario.setDtaCadastro(new Date());
@@ -52,7 +50,7 @@ public class UsuarioService {
 			throw new RevistaException("Login já utilizado por outro usuário");
 		}
 		
-		if(usuarios.getUsuarioPorEmail(usuario.getEmail()) != null) {
+		if(usuarios.getUsuarioPorEmail(usuario.getAutor().getEmail()) != null) {
 			throw new RevistaException("Email já cadastrado por outro usuário");
 		}
 		

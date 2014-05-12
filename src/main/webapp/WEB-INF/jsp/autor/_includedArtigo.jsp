@@ -8,7 +8,6 @@
 		</div>
 		<!-- botao ADD -->
 		<a class="addAutor btn btn-primary">Adicionar Autor</a>
-		<button type="submit" class="btn btn-success pull-right">Salvar</button>
 	</div>
 </div>
 
@@ -24,9 +23,22 @@ $(document).on('change', '.email', function() {
 		url: url,
 		type: 'POST',
 		dataType:'json',
-		success:function(data){
-			var parentPreName = self.parents('div.autores');
-			var preNome = parentPreName.children('div.row').children('div').children('.preNome');
+		success:function(data) {
+			var parentAutores = self.parents('div.autores');
+			var id = parentAutores.children('div.row').children('div').children('.autorId');
+			var preNome = parentAutores.children('div.row').children('div').children('.preNome');
+			var nome = parentAutores.children('div.row').children('div').children('.nome');
+			var sobreNome = parentAutores.children('div.row').children('div').children('.sobreNome');
+			var lattes = parentAutores.children('div.row').children('div').children('.lattes');
+			var instituicao = parentAutores.children('div.row').children('div').children('.instituicao');
+			var resumo = parentAutores.children('div.row').children('div').children('.resumo');
+			id.val(data.id);
+			preNome.val(data.prenome);
+			nome.val(data.nome);
+			sobreNome.val(data.sobrenome);
+			lattes.val(data.lattes);
+			instituicao.val(data.instituicao);
+			resumo.val(data.resumoBiografia);
 			/* options.push('<td>'+data.limitePre+'</td>'); */
 		    /* $(href).html(options.join('')); */
 		},  
@@ -62,14 +74,14 @@ $(document).on('click', '.addAutor', function() {
 			'<div class="row">' +
 				'<div class="form-group col-lg-8">' +
 					'<label>Nome do meio:</label> <input type="text"' +
-						'class="form-control" name="artigo.autores[].nome"' +
+						'class="form-control nome" name="artigo.autores[].nome"' +
 						'placeholder="Nome do Meio" />' +
 				'</div>'+
 			'</div>' +
 			
 			'<div class="row">' +
 				'<div class="form-group col-lg-8">' +
-					'<label>Sobrenome:*</label> <input type="text" class="form-control"' +
+					'<label>Sobrenome:*</label> <input type="text" class="form-control sobreNome"' +
 						'name="artigo.autores[].sobrenome" placeholder="Sobrenome" />' +
 				'</div>' +
 			'</div>' +
@@ -83,7 +95,7 @@ $(document).on('click', '.addAutor', function() {
 			
 			'<div class="row">' +
 				'<div class="form-group col-lg-8">' +
-					'<label>URL/Lattes:</label> <input type="text" class="form-control"' +
+					'<label>URL/Lattes:</label> <input type="text" class="form-control lattes"' +
 						'name="artigo.autores[].lattes" placeholder="URL" />' +
 				'</div>' +
 			'</div>' +
@@ -91,7 +103,7 @@ $(document).on('click', '.addAutor', function() {
 			'<div class="row">' +
 				'<div class="form-group col-lg-8">' +
 					'<label>Instituição/Afiliação:*</label> <input type="text"' +
-						'class="form-control" name="artigo.autores[].instituicao"' +
+						'class="form-control instituicao" name="artigo.autores[].instituicao"' +
 						'placeholder="Instituicao" />'+
 				'</div>' +
 			'</div>' +
@@ -99,9 +111,15 @@ $(document).on('click', '.addAutor', function() {
 			'<div class="row">' +
 				'<div class="form-group col-lg-8">' +
 					'<label>Resumo da Biografia(Ex.: departamento e área):</label>' +
-					'<textarea class="form-control"' +
+					'<textarea class="form-control resumo"' +
 						'name="artigo.autores[].resumoBiografia"' +
 						'placeholder="Resumo da Biografia"></textarea>' +
+				'</div>' +
+			'</div>' +
+			'<div class="row hide">' +
+				'<div class="form-group col-lg-8">' +
+				'<input type="hidden"' +
+					'class="form-control autorId" name="artigo.autores[].id" />'+	
 				'</div>' +
 			'</div>' +
 			

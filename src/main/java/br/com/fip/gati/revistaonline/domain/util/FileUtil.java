@@ -15,14 +15,14 @@ public class FileUtil {
 	
 	Properties prop = new Properties();
 	
-	public void salva(UploadedFile arq, String path) {
+	public void salva(UploadedFile arq, String path) throws IOException {
 		File folder = new File(path);
 		folder.mkdirs();
 		File destino = new File(path, arq.getFileName());
 		try {
 			IOUtils.copyLarge(arq.getFile(), new FileOutputStream(destino));
 		} catch (IOException e) {
-			throw new RuntimeException("Erro ao copiar arquivo", e);
+			throw e;
 		}
 
 	}

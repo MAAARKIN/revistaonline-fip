@@ -88,7 +88,7 @@ public class LoginController {
 		usuario.setDataHora(Calendar.getInstance());
 		usuarioRepositorio.update(usuario);
 		String link = "http://localhost:8080/revistaonline/login/esqueciMinhasenha/" + token;
-		mailer.send("Esqueci minha senha", link , usuario.getEmail());
+		mailer.send("Esqueci minha senha", link , usuario.getAutor().getEmail());
 		result.redirectTo(this).confirmacaoEmail();
 	}
 	

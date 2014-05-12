@@ -15,6 +15,7 @@
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet" />
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.css" rel="stylesheet" />
 	<link href="${pageContext.request.contextPath}/resources/css/sb-admin.css" rel="stylesheet" />
+	<link href="${pageContext.request.contextPath}/resources/css/fileinput.css" rel="stylesheet" />
     
 
     <!-- Add custom CSS here -->
@@ -26,7 +27,6 @@
   <body>
 <!--   	<div id="tudo"> -->
 <!--   		<div class="container"> -->
-  			
 			<jsp:include page="../includes/header.jsp" />
 			<jsp:include page="../includes/scripts.jsp" />
 

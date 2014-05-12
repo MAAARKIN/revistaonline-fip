@@ -3,8 +3,8 @@
 <div class="row">
 	<div class="form-group col-lg-3">
 		<label>E-mail:</label> <input type="text" class="form-control"
-			name="usuario.email" placeholder="josedasilva@dominio.com"
-			value="${usuario.email}"
+			name="autor.email" placeholder="josedasilva@dominio.com"
+			value="${autor.email}"
 			<c:if test="${action=='edit'}">readonly</c:if> />
 	</div>
 </div>

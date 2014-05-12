@@ -11,12 +11,14 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.fip.gati.revistaonline.domain.exception.RevistaException;
 import br.com.fip.gati.revistaonline.domain.model.enums.ArtigoStatusEnum;
@@ -26,10 +28,16 @@ import br.com.fip.gati.revistaonline.domain.model.enums.AvaliacaoStatusEnum;
 @Table(name = "artigo")
 public class Artigo extends Entity {
 
-	@NotNull
+	@NotNull(message="{artigo.titulo.nulo}")
+	@Size(min=8, max=64, message="{artigo.titulo.tamanho}")
+	@NotEmpty(message="{artigo.titulo.branco}")
 	private String titulo;
-	@NotNull
+	
+	@NotNull(message="{artigo.resumo.nulo}")
+	@Size(min=8, message="{artigo.titulo.tamanho}")
+	@NotEmpty(message="{artigo.resumo.branco}")
 	private String resumo;
+	
 	@NotNull
 	private String keyWord;
 	@ManyToMany
@@ -53,22 +61,18 @@ public class Artigo extends Entity {
 	@NotNull
 	private String agencias;
 
-	@NotNull
 	@Enumerated(EnumType.STRING)
 	private ArtigoStatusEnum status;
 	
-	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataSubmissao;
 	
 	@OneToMany(mappedBy="artigo", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<AvaliacaoArtigo> avaliacoes;
 	
-
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="revista_id")
-	@NotNull
-	private Revista revista;
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name="revista_id")
+//	private Revista revista;
 	
 
 	public String getAreaSubAreaDoConhecimento() {
@@ -193,13 +197,13 @@ public class Artigo extends Entity {
 	}
 	
 
-	public Revista getRevista() {
-		return revista;
-	}
-	
-	public void setRevista(Revista revista) {
-		this.revista = revista;
-	}
+//	public Revista getRevista() {
+//		return revista;
+//	}
+//	
+//	public void setRevista(Revista revista) {
+//		this.revista = revista;
+//	}
 
 
 	public void associarAvaliador(Avaliador avaliador) throws RevistaException {
@@ -233,11 +237,11 @@ public class Artigo extends Entity {
 	}
 		
 	public boolean isPendenteDeAvaliacao() {
-		return status == ArtigoStatusEnum.P;
+		return status == ArtigoStatusEnum.PENDENTE;
 	}
 	
 	public boolean isEmAvaliacao() {
-		return status == ArtigoStatusEnum.E;
+		return status == ArtigoStatusEnum.REVISAO_AVALIACAO;
 	}
 	
 }

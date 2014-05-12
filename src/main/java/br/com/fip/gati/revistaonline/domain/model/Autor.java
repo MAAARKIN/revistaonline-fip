@@ -59,10 +59,10 @@ public class Autor extends Entity {
 	@Size(max=100)
 	private String lattes;
 	
-	@Size(max=15)
+	@Size(max=20)
 	private String fone;
 
-	@Size(max=15)
+	@Size(max=20)
 	private String celular;
 	
 	@Size(max=150)

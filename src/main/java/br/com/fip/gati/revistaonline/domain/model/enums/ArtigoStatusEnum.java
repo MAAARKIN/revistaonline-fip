@@ -2,10 +2,10 @@ package br.com.fip.gati.revistaonline.domain.model.enums;
 
 public enum ArtigoStatusEnum {
 
-	P("PENDENTE"),
-	E("EM REVISAO/AVALIACAO"),
-	A("APROVADO"),
-	R("REPROVADO");
+	PENDENTE("PENDENTE"),
+	REVISAO_AVALIACAO("EM REVISAO/AVALIACAO"),
+	APROVADO("APROVADO"),
+	REPROVADO("REPROVADO");
 	
 	private String descricao;
 	

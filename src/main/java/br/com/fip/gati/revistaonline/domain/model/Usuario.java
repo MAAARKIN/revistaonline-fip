@@ -34,11 +34,6 @@ public class Usuario extends Entity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataHora; 
 	
-	@NotNull(message="{usuario.email.nulo}")
-	@Email(message="{usuario.email.invalido}")
-	@Column(unique=true)
-	private String email;
-	
 	@NotNull(message="{usuario.senha.nulo}")
 	@Size(min=8, max=64, message="{usuario.senha.tamanho}")
 	@Column(length=100)
@@ -46,10 +41,6 @@ public class Usuario extends Entity {
 	
 	@Transient
 	private String confirmacaoSenha;
-	
-	@NotNull(message="{usuario.nome.nulo}")
-	@Size(min=5, message="{usuario.nome.tamanho}")
-	private String nome;
 	
 	private boolean alterarSenhaProximoAcesso;
 	
@@ -72,15 +63,6 @@ public class Usuario extends Entity {
 	public Integer getTentativasLogon() {
 		return tentativasLogon;
 	}
-
-	/*
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}*/
 
 	public void setDtaCadastro(Date dtaCadastro) {
 		this.dtaCadastro = dtaCadastro;
@@ -112,14 +94,6 @@ public class Usuario extends Entity {
 
 	public void setConfirmacaoSenha(String confirmacaoSenha) {
 		this.confirmacaoSenha = confirmacaoSenha;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getNome() {
-		return nome;
 	}
 
 	public void setAlterarSenhaProximoAcesso(boolean alterarSenhaProximoAcesso) {
@@ -157,14 +131,6 @@ public class Usuario extends Entity {
 	public boolean isAutor() {
 		return autor != null;
 	}
-	
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public void setAtivo() {
 		this.status = "A";
@@ -179,7 +145,7 @@ public class Usuario extends Entity {
 	}
 
 	public UsuarioInfo getUsuarioInfo() {
-		return new UsuarioInfo(getId(), getAutor().getEmail(), getNome(),getLogin(), isAdmin());
+		return new UsuarioInfo(getId(), getAutor().getEmail(), getAutor().getNome(),getLogin(), isAdmin());
 	}
 	
 	public boolean isSenhaConfirmada() {

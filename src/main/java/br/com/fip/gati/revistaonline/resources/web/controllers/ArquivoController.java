@@ -1,5 +1,7 @@
 package br.com.fip.gati.revistaonline.resources.web.controllers;
 
+import java.io.IOException;
+
 import javax.servlet.ServletContext;
 
 import br.com.caelum.vraptor.Get;
@@ -36,7 +38,12 @@ public class ArquivoController {
 	public void upload(UploadedFile file) {
 	StringBuilder sb = new StringBuilder();
 	sb.append(context.getRealPath(this.environment.get("upload.target.dir"))).append("/").append(usuarioLogado.getUsuarioInfo().getID());
-	this.fileUtil.salva(file,sb.toString());
+	try {
+		this.fileUtil.salva(file,sb.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     result.redirectTo(IndexController.class).index();
 	}
 

@@ -34,7 +34,7 @@ public class AssociacaoAvaliadores {
 		for(Avaliador av : avaliadores) {
 			artigodb.associarAvaliador(av);
 		}
-		artigodb.setStatus(ArtigoStatusEnum.E);
+		artigodb.setStatus(ArtigoStatusEnum.REVISAO_AVALIACAO);
 		artigos.update(artigodb);
 	}
 

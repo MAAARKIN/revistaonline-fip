@@ -1,15 +1,13 @@
 package br.com.fip.gati.revistaonline.infrastructure.persistence.hibernate;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.caelum.vraptor.ioc.Component;
-import br.com.fip.gati.revistaonline.domain.model.Autor;
 import br.com.fip.gati.revistaonline.domain.model.Usuario;
 import br.com.fip.gati.revistaonline.domain.repositorio.UsuarioRepositorio;
 
@@ -57,8 +55,14 @@ public class UsuarioDAO extends GenericDAO<Usuario> implements UsuarioRepositori
 		if (email == null) {
 			return null;
 		}
-		return (Usuario) getCurrentSession().createCriteria(Usuario.class)
-				.add(Restrictions.eq("email", email))
-				.uniqueResult();
+		String hql = "select user from Usuario user, Autor autor " +
+				"where user.autor = autor.id " +
+				"and autor.email = :email";
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("email", email);
+		return super.findOneResult(hql, parameters);
+//		return (Usuario) getCurrentSession().createCriteria(Usuario.class)
+//				.add(Restrictions.eq("email", email))
+//				.uniqueResult();
 	}
 }
