@@ -33,12 +33,10 @@
 								<div class="row" >
 									<div class="form-group col-lg-6" >
 										<label>Selecione a revista a qual deseja enviar o artigo.</label>
-										<select class="form-control">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
+										<select class="form-control" name="artigo.revista.id">
+											<c:forEach items="${revistaList}" var="revista">  
+						                        <option value="${revista.id}">${revista.titulo}</option>  
+						                    </c:forEach>
 										</select>
 									</div>
 								</div>

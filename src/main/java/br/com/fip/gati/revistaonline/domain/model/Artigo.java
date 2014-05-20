@@ -11,10 +11,12 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -40,9 +42,12 @@ public class Artigo extends Entity {
 	
 	@NotNull
 	private String keyWord;
-	@ManyToMany
+	
+	@Valid
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinTable(name = "artigo_autor", joinColumns = @JoinColumn(name = "artigo_id"), inverseJoinColumns = @JoinColumn(name = "autor_id"))
 	private List<Autor> autores;
+	
 	@NotNull
 	private String secao;
 	@NotNull
@@ -70,9 +75,9 @@ public class Artigo extends Entity {
 	@OneToMany(mappedBy="artigo", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<AvaliacaoArtigo> avaliacoes;
 	
-//	@ManyToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name="revista_id")
-//	private Revista revista;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="revista_id")
+	private Revista revista;
 	
 
 	public String getAreaSubAreaDoConhecimento() {
@@ -197,13 +202,13 @@ public class Artigo extends Entity {
 	}
 	
 
-//	public Revista getRevista() {
-//		return revista;
-//	}
-//	
-//	public void setRevista(Revista revista) {
-//		this.revista = revista;
-//	}
+	public Revista getRevista() {
+		return revista;
+	}
+	
+	public void setRevista(Revista revista) {
+		this.revista = revista;
+	}
 
 
 	public void associarAvaliador(Avaliador avaliador) throws RevistaException {

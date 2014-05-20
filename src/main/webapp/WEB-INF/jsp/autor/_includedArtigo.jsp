@@ -5,6 +5,76 @@
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				O Autor <strong>${usuarioLogado.usuarioInfo.nome}</strong> já está incluso.
 			</div>
+			
+			<c:if test="${not empty artigo.autores}">
+			<c:forEach items="${artigo.autores}" var="autor">
+				<div class="autores">
+					<hr/>
+		    		<a class="delAutor btn btn-danger pull-right">Remover Autor</a>
+		    		<div class="row">
+						<div class="form-group col-lg-8">
+							<label>Prenome:</label> <input type="text" class="form-control preNome"
+								name="artigo.autores[].prenome" placeholder="Pre Nome"
+								value="${autor.prenome}" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-lg-8">
+							<label>Nome do meio:</label> <input type="text"
+								class="form-control nome" name="artigo.autores[].nome"
+								placeholder="Nome do Meio" value="${autor.nome}" />
+						</div>
+					</div>
+				
+					<div class="row">
+						<div class="form-group col-lg-8">
+							<label>Sobrenome:*</label> <input type="text" class="form-control sobreNome"
+								name="artigo.autores[].sobrenome" placeholder="Sobrenome" value="${autor.sobrenome}" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-lg-8">
+							<label>E-mail:*</label> <input type="text" class="form-control email"
+								name="artigo.autores[].email" placeholder="E-mail" value="${autor.email}" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-lg-8">
+							<label>URL/Lattes:</label> <input type="text" class="form-control lattes"
+								name="artigo.autores[].lattes" placeholder="URL" value="${autor.lattes}" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-lg-8">
+							<label>Instituição/Afiliação:*</label> 
+								<input type="text"
+									class="form-control instituicao" name="artigo.autores[].instituicao"
+									placeholder="Instituicao"
+									value="${autor.instituicao}" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-lg-8">
+							<label>Resumo da Biografia(Ex.: departamento e área):</label>
+							<textarea class="form-control resumo"
+								name="artigo.autores[].resumoBiografia"
+								placeholder="Resumo da Biografia">${autor.resumoBiografia}</textarea>
+						</div>
+					</div>
+					<div class="row hide">
+						<div class="form-group col-lg-8">
+						<input type="hidden"
+							class="form-control autorId" name="artigo.autores[].id" value="${autor.id}" />	
+						</div>
+					</div>
+				</div>
+				</c:forEach>
+			</c:if>
 		</div>
 		<!-- botao ADD -->
 		<a class="addAutor btn btn-primary">Adicionar Autor</a>

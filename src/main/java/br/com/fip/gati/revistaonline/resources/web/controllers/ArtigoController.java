@@ -18,9 +18,11 @@ import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.ValidationMessage;
 import br.com.fip.gati.revistaonline.domain.model.Artigo;
 import br.com.fip.gati.revistaonline.domain.model.Autor;
+import br.com.fip.gati.revistaonline.domain.model.Revista;
 import br.com.fip.gati.revistaonline.domain.model.enums.ArtigoStatusEnum;
 import br.com.fip.gati.revistaonline.domain.repositorio.ArtigoRepositorio;
 import br.com.fip.gati.revistaonline.domain.repositorio.AutorRepositorio;
+import br.com.fip.gati.revistaonline.domain.repositorio.RevistaRepositorio;
 import br.com.fip.gati.revistaonline.domain.util.FileUtil;
 import br.com.fip.gati.revistaonline.resources.web.UsuarioLogado;
 
@@ -34,10 +36,12 @@ public class ArtigoController {
 	private final Validator valitador;
 	private final Environment enviroment;
 	private final UsuarioLogado usuarioWeb;
+	private final RevistaRepositorio revistaRepositorio;
 	private final AutorRepositorio autorRepositorio;
 
 	public ArtigoController(ArtigoRepositorio artigoRep, Result result, Validator validator,
-			FileUtil fileUtil, Environment env, UsuarioLogado usuarioWeb, AutorRepositorio autorRepositorio) {
+			FileUtil fileUtil, Environment env, UsuarioLogado usuarioWeb, AutorRepositorio autorRepositorio,
+			RevistaRepositorio revistaRepositorio) {
 		this.fileUtil = fileUtil;
 		this.artigoRepositorio = artigoRep;
 		this.result = result;
@@ -45,11 +49,12 @@ public class ArtigoController {
 		this.enviroment = env;
 		this.usuarioWeb = usuarioWeb;
 		this.autorRepositorio = autorRepositorio;
+		this.revistaRepositorio = revistaRepositorio;
 	}
 	
 	@Get("/office/submissao")
 	public void formulario() {
-		
+		result.include("revistaList", revistaRepositorio.listAll());
 	}
 	
 	@Post
@@ -58,8 +63,9 @@ public class ArtigoController {
 		this.valitador.onErrorRedirectTo(this).formulario();
 		try {
 			this.fileUtil.salva(file, enviroment.get("upload.target.dir"));
-			
+			Revista revista = revistaRepositorio.load(artigo.getRevista().getId());
 			Autor autor = autorRepositorio.getAutorPorEmail(usuarioWeb.getUsuarioInfo().getEmail());
+			artigo.setRevista(revista);
 			artigo.getAutores().add(autor);
 			artigo.setDataSubmissao(Calendar.getInstance());
 			artigo.setStatus(ArtigoStatusEnum.PENDENTE);
