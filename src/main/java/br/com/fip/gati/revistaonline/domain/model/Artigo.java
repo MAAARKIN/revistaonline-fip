@@ -79,6 +79,9 @@ public class Artigo extends Entity {
 	@JoinColumn(name="revista_id")
 	private Revista revista;
 	
+	
+	private String caminhoArquivo;
+	
 
 	public String getAreaSubAreaDoConhecimento() {
 		return areaSubAreaDoConhecimento;
@@ -247,6 +250,14 @@ public class Artigo extends Entity {
 	
 	public boolean isEmAvaliacao() {
 		return status == ArtigoStatusEnum.REVISAO_AVALIACAO;
+	}
+
+	public String getCaminhoArquivo() {
+		return caminhoArquivo;
+	}
+
+	public void setCaminhoArquivo(String caminhoArquivo) {
+		this.caminhoArquivo = caminhoArquivo;
 	}
 	
 }

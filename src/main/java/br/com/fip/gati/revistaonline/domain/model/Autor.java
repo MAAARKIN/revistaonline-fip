@@ -36,7 +36,6 @@ public class Autor extends Entity {
 	@Size(min=3, max=100)
 	private String sobrenome;
 	
-	@NotNull
 	@Size(min=1, max=10)
 	private String iniciais;
 	
