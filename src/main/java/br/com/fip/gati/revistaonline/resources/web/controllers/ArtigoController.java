@@ -1,10 +1,14 @@
 package br.com.fip.gati.revistaonline.resources.web.controllers;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
@@ -61,20 +65,36 @@ public class ArtigoController {
 	public void salvar(Artigo artigo, UploadedFile file) {
 		this.valitador.validate(artigo);
 		this.valitador.onErrorRedirectTo(this).formulario();
+		File arquivo = null;
 		try {
-			this.fileUtil.salva(file, enviroment.get("upload.target.dir"));
 			Revista revista = revistaRepositorio.load(artigo.getRevista().getId());
 			Autor autor = autorRepositorio.getAutorPorEmail(usuarioWeb.getUsuarioInfo().getEmail());
 			artigo.setRevista(revista);
 			artigo.getAutores().add(autor);
 			artigo.setDataSubmissao(Calendar.getInstance());
 			artigo.setStatus(ArtigoStatusEnum.PENDENTE);
+			arquivo = salvaArquivo(file, enviroment.get("upload.target.dir"));
+			artigo.setCaminhoArquivo(arquivo.getAbsolutePath());
 			this.artigoRepositorio.save(artigo);
 			result.redirectTo(this).formulario();
-		} catch (IOException e) {
+		} catch (Exception e) {
+			arquivo.delete();
 			result.include("errors", Arrays.asList(new ValidationMessage("", "Problema com o envio do arquivo")))
 			.redirectTo(this).formulario();;
 		}
+	}
+	
+	public File salvaArquivo(UploadedFile arq, String path) throws IOException {
+		File folder = new File(path);
+		folder.mkdirs();
+		File destino = new File(path, arq.getFileName());
+		try {
+			IOUtils.copyLarge(arq.getFile(), new FileOutputStream(destino));
+		} catch (IOException e) {
+			throw e;
+		}
+		return destino;
+
 	}
 	
 	@Get("/artigo/{artigo.id}")

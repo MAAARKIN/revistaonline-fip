@@ -56,7 +56,7 @@
 											<input id="input-id" type="file" class="file" name="file" 
 											data-show-upload="false" 
 											data-show-preview="false"
-											data-browse-label="Arquivo"/>
+											data-browse-label="Arquivo" required="required"/>
 										</div>
 									</div>
 									<div class="col-lg-6">

@@ -13,42 +13,43 @@
 			<div class="row" >
 				<div class="form-group col-lg-4" >
 					<label>Resumo:</label>
-					<input type="text" class="form-control" name="artigo.resumo" placeholder="Resumo" value="${artigo.resumo}" />
+					<textarea class="form-control" name="artigo.resumo" placeholder="Resumo da Biografia">${artigo.resumo}</textarea>
+					<%-- <input type="text" class="form-control" name="artigo.resumo" placeholder="Resumo" value="${artigo.resumo}" /> --%>
 				</div>
 			</div>
 
 			<div class="row" >
 				<div class="form-group col-lg-4" >
 					<label>Área e sub-área do Conhecimento:</label>
-					<input type="text" class="form-control input-sm" name="artigo.areaSubAreaDoConhecimento" placeholder="AreaSubAreaDoConhecimento" value="${artigo.areaSubAreaDoConhecimento}" />
+					<input type="text" class="form-control" name="artigo.areaSubAreaDoConhecimento" placeholder="Administração; Contabilidade; Economia" value="${artigo.areaSubAreaDoConhecimento}" />
 				</div>	
 			</div>
 			
 			<div class="row" >
 				<div class="form-group col-lg-4" >
 					<label>Palavras-chave:</label>
-					<input type="text" class="form-control" name="artigo.keyWord" placeholder="KeyWord" value="${artigo.keyWord}" />
+					<input type="text" class="form-control" name="artigo.keyWord" placeholder="Palavra1, Palavra2" value="${artigo.keyWord}" />
 				</div>
 			</div>
 			
 			<div class="row" >
 				<div class="form-group col-lg-4" >
 					<label>Geo-espacial:</label>
-					<input type="text" class="form-control" name="artigo.geoEspacial" placeholder="GeoEspacial" value="${artigo.geoEspacial}" />
+					<input type="text" class="form-control" name="artigo.geoEspacial" placeholder="Brasil" value="${artigo.geoEspacial}" />
 				</div>
 			</div>
 			
 			<div class="row" >
 				<div class="form-group col-lg-4" >
 					<label>Cronológica ou histórica:</label>
-					<input type="text" class="form-control" name="artigo.cronologicaOuHistorica" placeholder="CronologicaOuHistorica" value="${artigo.cronologicaOuHistorica}" />
+					<input type="text" class="form-control" name="artigo.cronologicaOuHistorica" value="${artigo.cronologicaOuHistorica}" />
 				</div>
 			</div>
 
 			<div class="row" >
 				<div class="form-group col-lg-4" >
 					<label>Características da amostragem da pesquisa:</label>
-					<input type="text" class="form-control" name="artigo.caracteristicasDaAmostragemDaPesquisa" placeholder="CaracteristicasDaAmostragemDaPesquisa" value="${artigo.caracteristicasDaAmostragemDaPesquisa}" />
+					<input type="text" class="form-control" name="artigo.caracteristicasDaAmostragemDaPesquisa" value="${artigo.caracteristicasDaAmostragemDaPesquisa}" />
 				</div>
 			</div>
 			
@@ -75,7 +76,7 @@
 
 			<div class="row" >
 				<div class="form-group col-lg-4" >
-					<label>Agências:</label>
+					<label>Agências que formentaram ou patrocinaram:</label>
 					<input type="text" class="form-control" name="artigo.agencias" placeholder="Agencias" value="${artigo.agencias}" />
 				</div>
 			</div>
