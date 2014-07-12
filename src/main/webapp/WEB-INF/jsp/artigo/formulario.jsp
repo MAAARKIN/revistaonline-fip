@@ -1,35 +1,45 @@
-<%-- <div>
-	<form action="${linkTo[ArtigoController].salvar}" method="POST">
-		<fieldset>
-			<legend>Cadastrar Artigo</legend>
-			<jsp:include page="_form.jsp"/>
-			<button type="submit" class="btn btn-default">Salvar</button>
-		</fieldset>
-	</form>
 
-</div> --%>
-<!-- <div class="row">
-	<div class="col-lg-12">
-		<h1 class="page-header">Dashboard</h1>
-	</div>
-	/.col-lg-12
-</div> -->
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">Dados relacionados a submissão</div>
 
 			<div class="panel-body">
-				<form action="${linkTo[ArtigoController].salvar}" method="POST" enctype="multipart/form-data" >
+				<form action="${linkTo[ArtigoController].salvar}" method="POST" enctype="multipart/form-data" id="artigoForm" >
 					<div id="rootwizard">
 						<ul class="nav nav-tabs">
-							<li><a href="#tab1" data-toggle="tab">Revista</a></li>
-							<li><a href="#tab2" data-toggle="tab">Artigo</a></li>
-							<li><a href="#tab3" data-toggle="tab">Autores</a></li>
-							<li><a href="#tab4" data-toggle="tab">Arquivo</a></li>
+							<li><a href="#tab1" data-toggle="tab">Termos e Condições</a></li>
+							<li><a href="#tab2" data-toggle="tab">Revista</a></li>
+							<li><a href="#tab3" data-toggle="tab">Artigo</a></li>
+							<li><a href="#tab4" data-toggle="tab">Autores</a></li>
+							<li><a href="#tab5" data-toggle="tab">Arquivo</a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane" id="tab1">
+								<div class="alert alert-danger fade in" id="alertCondicoes" style="display:none;">
+								    Você deve aceitar os termos de compromisso antes de continuar.
+								</div>
+								
+								<div class="row" >
+									<div class="form-group col-lg-8" >
+										<label>Condições para submissão</label>
+										<div class="checkbox">
+									        <input type="checkbox" name="termoDeSubmissao" class="termo" required="required" /> Escrever aqui os termos de condições.
+									   	</div>
+									</div>
+								</div>
+								
+								<div class="row" >
+									<div class="form-group col-lg-8" >
+										<label>Declaração de Direito Autorial </label>
+										<div class="checkbox">
+									        <input type="checkbox" name="direitoAutoral" class="autoral" required="required" /> Escrever aqui o texto de direito autoral.
+									   	</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="tab-pane" id="tab2">
 								<div class="row" >
 									<div class="form-group col-lg-6" >
 										<label>Selecione a revista a qual deseja enviar o artigo.</label>
@@ -42,13 +52,13 @@
 								</div>
 								
 							</div>
-							<div class="tab-pane" id="tab2">
+							<div class="tab-pane" id="tab3">
 								<jsp:include page="_form.jsp" />
 							</div>
-							<div class="tab-pane" id="tab3">
+							<div class="tab-pane" id="tab4">
 								<jsp:include page="../autor/_includedArtigo.jsp" />
 							</div>
-							<div class="tab-pane" id="tab4">
+							<div class="tab-pane" id="tab5">
 								<label>*Selecione o arquivo para o envio do artigo.</label>
 								<div class="row">
 									<div class="col-lg-6">
@@ -82,9 +92,27 @@
 	</div>
 </div>
 
+
 <script>
 
 	$(document).ready(function() {
-		$('#rootwizard').bootstrapWizard({'tabClass' : 'nav nav-tabs'});
+		
+		$('#rootwizard').bootstrapWizard(
+				{
+					'tabClass' : 'nav nav-tabs',
+					onTabClick: function(tab, navigation, index) {
+						return false;
+					},
+					'onNext': function(tab, navigation, index) {
+						var condicoesForm = $('#tab1');
+						var termo = condicoesForm.children('div.row').children('div').children('div').children('.termo').is(':checked');
+						var direitoAutoral = condicoesForm.children('div.row').children('div').children('div').children('.autoral').is(':checked');
+						if(termo == false || direitoAutoral == false) {
+							$('#alertCondicoes').show();
+							return false;
+						}
+						$('#alertCondicoes').hide();
+			  		}
+				});
 	});
 </script>

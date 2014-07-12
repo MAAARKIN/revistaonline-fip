@@ -55,20 +55,6 @@
 			
 			<div class="row" >
 				<div class="form-group col-lg-4" >
-					<label>Seção:</label>
-					<input type="text" class="form-control" name="artigo.secao" placeholder="Secao" value="${artigo.secao}" />
-				</div>
-			</div>
-
-			<div class="row" >
-				<div class="form-group col-lg-4" >
-					<label>Condições para Submissão:</label>
-					<input type="text" class="form-control" name="artigo.condicoesParaSubmissao" placeholder="CondicoesParaSubmissao" value="${artigo.condicoesParaSubmissao}" />
-				</div>
-			</div>
-			
-			<div class="row" >
-				<div class="form-group col-lg-4" >
 					<label>Idioma:</label>
 					<input type="text" class="form-control" name="artigo.idioma" placeholder="Idioma" value="${artigo.idioma}" />
 				</div>

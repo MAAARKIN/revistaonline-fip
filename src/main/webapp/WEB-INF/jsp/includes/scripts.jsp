@@ -6,6 +6,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery.bootstrap.wizard.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.mask.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/fileinput.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 
 <script>
 $(document).ready(function(){
