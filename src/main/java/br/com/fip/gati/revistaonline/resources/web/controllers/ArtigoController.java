@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -23,18 +22,17 @@ import br.com.caelum.vraptor.validator.ValidationMessage;
 import br.com.fip.gati.revistaonline.domain.model.Artigo;
 import br.com.fip.gati.revistaonline.domain.model.Autor;
 import br.com.fip.gati.revistaonline.domain.model.Revista;
+import br.com.fip.gati.revistaonline.domain.model.business.ArtigoBusiness;
 import br.com.fip.gati.revistaonline.domain.model.enums.ArtigoStatusEnum;
 import br.com.fip.gati.revistaonline.domain.repositorio.ArtigoRepositorio;
 import br.com.fip.gati.revistaonline.domain.repositorio.AutorRepositorio;
 import br.com.fip.gati.revistaonline.domain.repositorio.RevistaRepositorio;
-import br.com.fip.gati.revistaonline.domain.util.FileUtil;
 import br.com.fip.gati.revistaonline.resources.web.UsuarioLogado;
 
 
 @Resource
 public class ArtigoController {
 	
-	private FileUtil fileUtil;
 	private ArtigoRepositorio artigoRepositorio;
 	private final Result result;
 	private final Validator valitador;
@@ -42,11 +40,11 @@ public class ArtigoController {
 	private final UsuarioLogado usuarioWeb;
 	private final RevistaRepositorio revistaRepositorio;
 	private final AutorRepositorio autorRepositorio;
+	private ArtigoBusiness artigoBusiness;
 
 	public ArtigoController(ArtigoRepositorio artigoRep, Result result, Validator validator,
-			FileUtil fileUtil, Environment env, UsuarioLogado usuarioWeb, AutorRepositorio autorRepositorio,
-			RevistaRepositorio revistaRepositorio) {
-		this.fileUtil = fileUtil;
+			Environment env, UsuarioLogado usuarioWeb, AutorRepositorio autorRepositorio,
+			RevistaRepositorio revistaRepositorio, ArtigoBusiness artigoBusiness) {
 		this.artigoRepositorio = artigoRep;
 		this.result = result;
 		this.valitador = validator;
@@ -54,6 +52,7 @@ public class ArtigoController {
 		this.usuarioWeb = usuarioWeb;
 		this.autorRepositorio = autorRepositorio;
 		this.revistaRepositorio = revistaRepositorio;
+		this.artigoBusiness = artigoBusiness;
 	}
 	
 	@Get("/office/submissao")
@@ -69,32 +68,17 @@ public class ArtigoController {
 		try {
 			Revista revista = revistaRepositorio.load(artigo.getRevista().getId());
 			Autor autor = autorRepositorio.getAutorPorEmail(usuarioWeb.getUsuarioInfo().getEmail());
-			artigo.setRevista(revista);
-			artigo.getAutores().add(autor);
-			artigo.setDataSubmissao(Calendar.getInstance());
-			artigo.setStatus(ArtigoStatusEnum.PENDENTE);
-			arquivo = salvaArquivo(file, enviroment.get("upload.target.dir"));
-			artigo.setCaminhoArquivo(arquivo.getAbsolutePath());
+			arquivo = artigoBusiness.salvarArtigoComArquivo(file, enviroment.get("upload.target.dir"), revista, autor, artigo);
 			this.artigoRepositorio.save(artigo);
 			result.redirectTo(this).formulario();
 		} catch (Exception e) {
-			arquivo.delete();
+			e.printStackTrace();
+			if(arquivo.exists()) {
+				arquivo.delete();
+			}
 			result.include("errors", Arrays.asList(new ValidationMessage("", "Problema com o envio do arquivo")))
 			.redirectTo(this).formulario();;
 		}
-	}
-	
-	public File salvaArquivo(UploadedFile arq, String path) throws IOException {
-		File folder = new File(path);
-		folder.mkdirs();
-		File destino = new File(path, arq.getFileName());
-		try {
-			IOUtils.copyLarge(arq.getFile(), new FileOutputStream(destino));
-		} catch (IOException e) {
-			throw e;
-		}
-		return destino;
-
 	}
 	
 	@Get("/artigo/{artigo.id}")
@@ -105,12 +89,12 @@ public class ArtigoController {
 	
 	@Put("/artigo/{artigo.id}")
 	public void atualizar(Artigo artigo) {
-
 		this.valitador.validate(artigo);
 		this.valitador.onErrorRedirectTo(this).formulario();
 		this.artigoRepositorio.update(artigo);
 		result.include("success", "Cadastrou").redirectTo(IndexController.class).index();
 	}
+	
 	@Get("/artigo/editar/{artigo.id}")
 	public Artigo editar(Artigo artigo) {
 		Artigo arti = this.artigoRepositorio.load(artigo.getId());

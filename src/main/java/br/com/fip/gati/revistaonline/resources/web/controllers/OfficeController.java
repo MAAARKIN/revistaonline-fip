@@ -1,6 +1,5 @@
 package br.com.fip.gati.revistaonline.resources.web.controllers;
 
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,10 +21,11 @@ import br.com.fip.gati.revistaonline.domain.repositorio.AvaliacaoRepositorio;
 import br.com.fip.gati.revistaonline.domain.repositorio.AvaliadorRepositorio;
 import br.com.fip.gati.revistaonline.domain.repositorio.RevistaRepositorio;
 import br.com.fip.gati.revistaonline.domain.repositorio.UsuarioRepositorio;
-import br.com.fip.gati.revistaonline.resources.web.UsuarioLogado;
+import br.com.fip.gati.revistaonline.domain.service.autenticacao.Auth;
 import br.com.fip.gati.revistaonline.resources.web.Controllers;
+import br.com.fip.gati.revistaonline.resources.web.UsuarioLogado;
 
-
+@Auth
 @Resource
 public class OfficeController {
 	private Result result;

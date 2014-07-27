@@ -14,7 +14,6 @@ import br.com.fip.gati.revistaonline.domain.service.autenticacao.Auth;
 import br.com.fip.gati.revistaonline.domain.service.autenticacao.Permissao;
 import br.com.fip.gati.revistaonline.resources.web.UsuarioLogado;
 import br.com.fip.gati.revistaonline.resources.web.controllers.IndexController;
-import br.com.fip.gati.revistaonline.resources.web.controllers.LoginController;
 
 @Intercepts
 @RequestScoped
@@ -49,6 +48,7 @@ public class AuthInterceptor implements Interceptor {
 	 * @param autorizacao
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private boolean hasAccess(Auth autorizacao) {
 		//se a anotacao não possuir roles dentro, só valida o usuario logado
 		if (autorizacao == null) {
