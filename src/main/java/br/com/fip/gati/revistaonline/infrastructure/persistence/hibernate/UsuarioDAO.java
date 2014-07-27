@@ -2,7 +2,7 @@ package br.com.fip.gati.revistaonline.infrastructure.persistence.hibernate;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Calendar;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -55,14 +55,23 @@ public class UsuarioDAO extends GenericDAO<Usuario> implements UsuarioRepositori
 		if (email == null) {
 			return null;
 		}
-		String hql = "select user from Usuario user, Autor autor " +
-				"where user.autor = autor.id " +
-				"and autor.email = :email";
+		StringBuilder hql = new StringBuilder();
+		hql.append("select user from Usuario user, Autor autor ");
+		hql.append("where user.autor = autor.id ");
+		hql.append("and autor.email = :email");
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("email", email);
-		return super.findOneResult(hql, parameters);
+		return super.findOneResult(hql.toString(), parameters);
 //		return (Usuario) getCurrentSession().createCriteria(Usuario.class)
 //				.add(Restrictions.eq("email", email))
 //				.uniqueResult();
+	}
+	
+	public boolean validarToken(Usuario usuario, String token) {
+		Calendar time = usuario.getDataHora();
+		if((time.getTimeInMillis() - Calendar.getInstance().getTimeInMillis()) > -900000 ){
+			return true; 
+		}
+		return false; 
 	}
 }
